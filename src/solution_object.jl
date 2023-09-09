@@ -7,6 +7,12 @@ Constructs a solution object for a continuation problem.
 
 The solution is represented by a vector of the parameter values `λ` and a matrix of solutions `x` with the different components.
 
+# Fields
+- `x`: The solution matrix.
+- `λ`: The parameter values.
+- `prob`: The continuation problem.
+- `ncols`: The number of columns of the solution matrix `x` printed in the terminal.
+
 # Example of usage
 ```julia
 using NumericalContinuation

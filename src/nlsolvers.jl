@@ -15,7 +15,7 @@ at the `n`th iteration. The update is given by
 x_{n+1} = x_n + Δx_n.
 ```
 
-# Arguments
+# Fields
 - `ϵₓ::T = 1e-8`: The tolerance for the norm of the successive iterations ||xₙ₊₁ - xₙ||/||xₙ||
 - `ϵᵣ::T = 1e-8`: The tolerance for the norm of the residual ||f(xₙ)||
 - `maxiters::Int = 20`: The maximum number of iterations.
@@ -96,7 +96,7 @@ J_{n+1} = J_n + ((f_{n+1} - f_n) - J_n Δx_n) Δx_n' / (Δx_n' Δx_n)
 where `J_n` is the Jacobian matrix at the nth iteration and `Δx_n = x_{n+1} - x_n` is the change in the solution.
 
 
-# Arguments
+# Fields
 - `ϵₓ::T = 1e-8`: The tolerance for the norm of the successive iterations ||xₙ₊₁ - xₙ||/||xₙ||
 - `ϵᵣ::T = 1e-8`: The tolerance for the norm of the residual ||f(xₙ)||
 - `maxiters::Int = 20`: The maximum number of iterations.

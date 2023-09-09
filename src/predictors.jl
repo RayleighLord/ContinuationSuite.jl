@@ -13,7 +13,7 @@ From a known value of the solution `uₛ₀`, the prediction is updated by compu
 vector `t` and the next solution is computed as:
 
 ```math
-uₛ = uₛ₀ + Δs t,
+uₛ = uₛ₀ + t Δs,
 ```
 where `Δs` is the continuation step size in the pseudo-arclength. The tangent vector `t` is
 obtained from:
