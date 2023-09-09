@@ -92,8 +92,8 @@ The update formula for the Jacobian is
 
 ```math
 J_{n+1} = J_n + ((f_{n+1} - f_n) - J_n Δx_n) Δx_n' / (Δx_n' Δx_n)
-````
-where J_n is the Jacobian matrix at the nth iteration and Δx_n = x_{n+1} - x_n is the change in the solution.
+```
+where `J_n` is the Jacobian matrix at the nth iteration and `Δx_n = x_{n+1} - x_n` is the change in the solution.
 
 
 # Arguments
