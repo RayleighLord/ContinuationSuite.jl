@@ -31,10 +31,10 @@ function continuation(prob::AbstractContinuationProblem, x₀, λ₀)
     @unpack λmin, λmax, verbose, maxsteps, ncols = ContPars
     info = ContPars.corrector.info
 
-    u₀, t = initialize_solution(x₀, λ₀, prob)
-    u = [u₀]
+    u₁, t = initialize_solution(x₀, λ₀, prob)
+    u = [u₁]
 
-    verbose && print_evolution(1, u₀, info; ncols = ncols)
+    verbose && print_evolution(1, u₁, info; ncols = ncols)
 
     for n in 1:(maxsteps - 1)
         uₙ₊₁, t = continue_step(u[end], t, prob)
@@ -67,9 +67,9 @@ function initialize_solution(x₀, λ₀, prob::AbstractContinuationProblem)
     t = zeros(length(u_init))
     t[end] = direction == :forward ? 1.0 : -1.0
 
-    u₀ = correct(u_init, u_init, t, 0.0, prob)
+    u₁ = correct(u_init, u_init, t, 0.0, prob)
 
-    return u₀, t
+    return u₁, t
 end
 
 function compute_stability(u, jac)
