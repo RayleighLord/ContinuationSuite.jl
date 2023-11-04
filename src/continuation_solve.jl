@@ -42,7 +42,10 @@ function continuation(prob::AbstractContinuationProblem, x₀, λ₀)
 
         verbose && print_evolution(n + 1, uₙ₊₁, info; ncols = ncols)
 
-        (λmin ≤ uₙ₊₁[end] ≤ λmax) || break
+        if (λmin ≥ uₙ₊₁[end]) || (uₙ₊₁[end] ≥ λmax)
+            final_step!(u[end], u[end - 1], λmax, λmin, prob)
+            break
+        end
     end
 
     return build_solution(u, prob)
@@ -70,6 +73,19 @@ function initialize_solution(x₀, λ₀, prob::AbstractContinuationProblem)
     u₁ = correct(u_init, u_init, t, 0.0, prob)
 
     return u₁, t
+end
+
+function final_step!(uₙ₊₁, uₙ, λmax, λmin, prob::AbstractContinuationProblem)
+    @unpack ContPars = prob
+    @unpack direction = ContPars
+
+    if uₙ₊₁[end] ≤ λmin
+        u, t = initialize_solution(uₙ[1:(end - 1)], λmin, prob)
+        uₙ₊₁ .= u
+    elseif uₙ₊₁[end] ≥ λmax
+        u, t = initialize_solution(uₙ[1:(end - 1)], λmax, prob)
+        uₙ₊₁ .= u
+    end
 end
 
 function compute_stability(u, jac)
