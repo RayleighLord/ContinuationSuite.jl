@@ -40,12 +40,13 @@ function continuation(prob::AbstractContinuationProblem, x₀, λ₀)
         uₙ₊₁, t = continue_step(u[end], t, prob)
         push!(u, uₙ₊₁)
 
-        verbose && print_evolution(n + 1, uₙ₊₁, info; ncols = ncols)
-
         if (λmin ≥ uₙ₊₁[end]) || (uₙ₊₁[end] ≥ λmax)
             final_step!(u[end], u[end - 1], λmax, λmin, prob)
+            verbose && print_evolution(n + 1, u[end], info; ncols = ncols)
             break
         end
+
+        verbose && print_evolution(n + 1, uₙ₊₁, info; ncols = ncols)
     end
 
     return build_solution(u, prob)
